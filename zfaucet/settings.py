@@ -23,12 +23,14 @@ if ENVIRONMENT not in ['dev', 'stage', 'prod']:
         raise Exception('Unknown settings environment "%s"' % ENVIRONMENT)
 print 'settings environment is ' + ENVIRONMENT
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
-if ENVIRONMENT == 'prod':
-        SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
-else:
-	SECRET_KEY = 'SECRETSECRET'
+#if ENVIRONMENT == 'prod':
+#        SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+#else:
+
+# These secrets are written by Ansible during provisioning.
+SECRET_KEY = ''
+DJANGO_POSTGRESQL_PASSWORD = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENVIRONMENT == 'dev'
@@ -104,7 +106,7 @@ else:
                         'ENGINE': 'django.db.backends.postgresql_psycopg2',
                         'NAME': 'django',
                         'USER': 'django',
-                        'PASSWORD': os.environ['DJANGO_POSTGRESQL_PASSWORD'],
+                        'PASSWORD': DJANGO_POSTGRESQL_PASSWORD,
                         'HOST': '127.0.0.1',
                         'PORT': '5432',
                         'CONN_MAX_AGE': 3600,
@@ -144,7 +146,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
