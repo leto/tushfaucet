@@ -1,10 +1,10 @@
     <footer class="footer">
       <div class="container">
-        <div class="row">
-          <div class="stats col-md-4 pull-left">
+        <div class="stats row">
+          <div class="col-md-4">
             <ul>
               <li>
-                <i class="fa fa-code-fork" aria-hidden="true"></i>&nbsp;Currently running: 1.0.8
+                <i class="fa fa-code-fork" aria-hidden="true"></i>&nbsp;Currently running: {{ version }}
               </li>
               <li>
                 <i class="fa fa-database" aria-hidden="true"></i>&nbsp;Block Height: {{ height }}
@@ -14,7 +14,7 @@
               </li>
             </ul>
           </div>
-          <div class="stats col-md-4 pull-left">
+          <div class="col-md-4">
             <ul>
               <li>
                 <i class="fa fa-money" aria-hidden="true"></i>&nbsp;Payouts: {{ payouts }}

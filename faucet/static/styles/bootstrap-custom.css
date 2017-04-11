@@ -5,11 +5,11 @@ html {
 
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
   background-color: #30332e;
   color: #fffbfc;
   background-image: url("/static/images/blueprint.png");
+  margin-bottom: 60px;
+  background-size: 70%;
 }
 
 .panel-info > .panel-heading {
@@ -17,8 +17,9 @@ body {
   color: rgb(54, 35, 105);
 }
 
-.panel-text p {
+.panel-text {
   color: #505059;
+  padding: 0 1em;
 }
 
 .panel-body {
@@ -30,7 +31,7 @@ body {
   margin-top: 20px;
 }
 
-.buttons {
+.buttons .col-md-4 {
   margin-top: 10px;
 }
 
@@ -59,6 +60,16 @@ body {
   display: inline;
   color: rgb(72, 40, 153);
   font-size: 18px;
+  padding: 15px;
+}
+.modal-header {
+  background-color: #dfd9f7;
+}
+.modal-title {
+  color: rgb(54, 35, 105);
+}
+.modal-body {
+  padding: 15px 30px;
 }
 
 .navbar {
@@ -74,23 +85,30 @@ body {
 	background-color: #30332e;
 	color: #62bbc1;
 	border-color: #62bbc1;
-
-
 }
 
 .panel-title {
   font-size: 24px;
-  margin-left: 20px;
+  text-align: center;
+}
+.panel-info {
+  border-color: #cfc4f9;
+}
+.panel-info > .panel-heading {
+  border-color: #cfc4f9;
 }
 
 .form-control {
-
 	background-color: #30332e;
-	color: #ec058e;
+  color: #f3bc6a;
 	border-color: #62bbc1;
-
 }
-
+.input-group .form-control {
+  z-index: 0;
+}
+.input-group .form-control:focus {
+  z-index: 0;
+}
 
 .form-control:focus {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 251, 252, 0.6);
@@ -111,7 +129,7 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 20%;
+  /*height: 100px;*/
   background-color: #010400;
 }
 

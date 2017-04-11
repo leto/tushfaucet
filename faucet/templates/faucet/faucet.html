@@ -10,12 +10,6 @@
 
 {% block content %}
 
-	{% if flash %}
-		<div class="alert alert-info">
-		  {{ message }}
-		</div>
-	{% endif %}
-
 
 
  	<div class="row">
@@ -28,11 +22,22 @@
 				</div>
 
 					<div class="panel-body">
+						
+						{% if flash %}
+							<div class="alert alert-info">
+								{{ message }}
+							</div>
+						{% endif %}
+
 						<div class="panel-text">
 							<p>
-								Enter your address and receive a small amount of testnet ZEC to play with.<br>
-								Currently only <span class="taddress">transparent addresses</span> are supported, but <span class="zaddress">shielded address</span> support is coming soon.</br>
-								To maintain enough funds for everyone, transactions may not send if you recently used the faucet.</br>
+								Enter your address and receive a small amount of testnet ZEC to play with.
+							</p>
+							<p>
+								Currently only <span class="taddress">transparent addresses</span> are supported, but <span class="zaddress">shielded address</span> support is coming soon.
+							</p>
+							<p>
+								To maintain enough funds for everyone, transactions may not send if you recently used the faucet.
 								Faucet is refilled every few hours.  Donations appreciated!</br>
 							</p>
 						</div>
@@ -40,7 +45,7 @@
 							{% csrf_token %}
 							<div class="input-group col-md-8">
 								<span class="input-group-addon">Address</span>
-								<input class="form-control" placeholder="t1Uzwo2Ygks9ELztbgmy9WgfMGUetRg6UdB" name="address" maxlength="34" type="text"/>
+								<input class="form-control" placeholder="t1Uzwo2Ygks9ELztbgmy9WgfMGUetRg6UdB" name="address" maxlength="35" type="text"/>
 							</div>
 
 							<div class="form-group buttons">
