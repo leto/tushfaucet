@@ -69,7 +69,13 @@ body {
   color: rgb(54, 35, 105);
 }
 .modal-body {
-  padding: 15px 30px;
+  padding: 30px;
+}
+.modal-body p {
+  overflow-x: auto;
+}
+.modal-dialog {
+  width: 850px;
 }
 
 .navbar {
