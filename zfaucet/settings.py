@@ -35,13 +35,9 @@ DJANGO_POSTGRESQL_PASSWORD = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENVIRONMENT == 'dev'
 
-if ENVIRONMENT == 'dev':
-        ALLOWED_HOSTS = []
-else:
-	#Change to your site.
-        # prod and stage
-        ALLOWED_HOSTS = ['.yoursite.com',
-			'127.0.0.1']
+
+# production
+ALLOWED_HOSTS = ['faucet.testnet.z.cash', '127.0.0.1']
 
 # Application definition
 
