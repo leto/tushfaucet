@@ -8,9 +8,6 @@ from datetime import *
 from pyZcash.rpc.ZDaemon import *
 from faucet.models import *
 
-#TODO: where to put this?
-zd = ZDaemon()
-version = zd.getVersion()
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -24,6 +21,9 @@ def index(request):
 	# TODO: Going to show the page no matter what, so pull these variables out.
 	hc = HealthCheck.objects.latest('timestamp')
 	payouts = Drip.objects.count()
+	#TODO: where to put this?
+	zd = ZDaemon()
+	version = zd.getVersion()
 
 	#If it is a post, an address was submitted.
 	if request.method == 'POST':
@@ -52,6 +52,8 @@ def index(request):
 
 		# zd = ZDaemon()
 		tx = zd.sendTransparent(address, 0.1)
+
+		# TODO: Give better error if faucet is empty!
 
 		#Did the tx work?
 		if tx:
