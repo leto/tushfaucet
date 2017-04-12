@@ -19,8 +19,16 @@ def get_client_ip(request):
 
 def index(request):
 	# TODO: Going to show the page no matter what, so pull these variables out.
-	hc = HealthCheck.objects.latest('timestamp')
-	payouts = Drip.objects.count()
+	if HealthCheck.objects.latest('timestamp'):
+		hc = HealthCheck.objects.latest('timestamp')
+		balance = hc.balance
+		difficulty = hc.difficulty
+		height = hc.height
+		payouts = Drip.objects.count()
+	else:
+		balance = '0'
+		difficulty = '0'
+		height = '0'
 	#TODO: where to put this?
 	zd = ZDaemon()
 	version = zd.getVersion()
@@ -60,9 +68,9 @@ def index(request):
 			#Save Drip.
 			drip = Drip(address=address,txid=tx,ip=ip)
 			drip.save()
-			return render(request, 'faucet/faucet.html', {'version':version,'balance':hc.balance,'difficulty':hc.difficulty,'height':hc.height, 'payouts':payouts, 'flash':True, 'message':"Sent! txid:" + tx})
+			return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Sent! txid:" + tx})
 		else:
-			return render(request, 'faucet/faucet.html', {'version':version,'balance':hc.balance,'difficulty':hc.difficulty,'height':hc.height, 'payouts':payouts, 'flash':True, 'message':"Issue sending transaction.  Is your address correct?"})
+			return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Issue sending transaction.  Is your address correct?"})
 
 
-	return render(request, 'faucet/faucet.html', {'version':version,'balance':hc.balance,'difficulty':hc.difficulty,'height':hc.height, 'payouts':payouts, 'flash':False, 'message':""})
+	return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':False, 'message':""})
