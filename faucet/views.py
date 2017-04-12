@@ -52,7 +52,7 @@ def index(request):
 			# TODO: keep track of sessions as well, track one per session?
 
 			if timesince < (60*60*12):
-				return render(request, 'faucet/faucet.html', {'version':version,'balance':hc.balance,'difficulty':hc.difficulty,'height':hc.height, 'payouts':payouts, 'flash':True, 'message':"Sorry, you received a payout too recently.  Come back later."})
+				return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Sorry, you received a payout too recently.  Come back later."})
 
 		except (Drip.DoesNotExist, IndexError) as e:
 			# Nothing in queryset, so we've never seen this ip and address before (individually)
@@ -68,7 +68,7 @@ def index(request):
 			#Save Drip.
 			drip = Drip(address=address,txid=tx,ip=ip)
 			drip.save()
-			return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Sent! txid:" + tx})
+			return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Sent! txid: " + tx})
 		else:
 			return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':"Issue sending transaction.  Is your address correct?"})
 
