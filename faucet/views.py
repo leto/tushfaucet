@@ -5,7 +5,7 @@ from django.utils import timezone
 
 from datetime import *
 
-from pyzcash.rpc.ZDaemon import *
+from pyZcash.rpc.ZDaemon import *
 from faucet.models import *
 
 #TODO: where to put this?
