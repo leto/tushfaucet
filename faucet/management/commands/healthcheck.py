@@ -11,6 +11,10 @@ class Command(BaseCommand):
 		height = zd.getNetworkHeight()
 		difficulty = zd.getNetworkDifficulty()
 
+		# Sweep coinbase funds into zaddr. Not sure where to put this
+		zaddrs = zd.z_listaddresses()
+		zd.sweep_coinbase(zaddrs[0])
+
 		hc = HealthCheck()
 		hc.balance = balance
 		hc.height = height
