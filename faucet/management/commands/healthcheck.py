@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
 	def handle(self, *args, **options):
 		zd = ZDaemon()
-		balance = zd.getTotalBalance()
+		balance = zd.getbalance()
 		height = zd.getNetworkHeight()
 		difficulty = zd.getNetworkDifficulty()
 
