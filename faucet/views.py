@@ -73,7 +73,7 @@ def index(request):
             elif len(address) == len('ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9'):
                 # sender = 'ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9'
                 sender = 'tmQWmuaD3kAZ5U1NN1nFJJh5h7QQeMQ46xC'
-                msg = 'Thanks for using zfaucet!'.encode('hex')
+                msg = 'Thanks for using zfaucet!'
                 opid = zd.z_sendmany(sender, address, 0.01, msg)
                 print "OPID", opid
                 if opid != None and 'opid' in opid:
