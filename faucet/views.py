@@ -72,7 +72,8 @@ def index(request):
                     return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
             elif len(address) == len('ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9'):
                 # sender = 'ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9'
-                sender = zd.find_taddr_with_unspent()
+                zaddrs = zd.z_listaddresses()
+                sender = zaddrs[0]
                 msg = 'Thanks for using zfaucet!'
                 opid = zd.z_sendmany(sender, address, 0.01, msg)
                 print "OPID", opid
