@@ -51,9 +51,9 @@ def index(request):
 
             # TODO: keep track of sessions as well, track one per session?
 
-            if timesince < (60*60*12):
-                msg = "Sorry, you received a payout too recently.  Come back later."
-                return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
+            #if timesince < (60*60*12):
+                # msg = "Sorry, you received a payout too recently.  Come back later."
+                # return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
 
         except (Drip.DoesNotExist, IndexError) as e:
             # Nothing in queryset, so we've never seen this ip and address before (individually)
