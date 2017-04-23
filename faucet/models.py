@@ -11,7 +11,9 @@ class HealthCheck(Model):
 	timestamp = DateTimeField(auto_now_add=True, db_index=True)
 	height = IntegerField(null=False)
 	difficulty = FloatField()
-	balance = FloatField()
+	balance = FloatField(null=True)
+	t_balance = FloatField(default=0)
+	z_balance = FloatField(default=0)
 
 	class Meta:
 		ordering = ['-timestamp']
@@ -29,6 +31,3 @@ class Drip(Model):
 
 	class Meta:
 		ordering = ['-timestamp']
-	
-
-

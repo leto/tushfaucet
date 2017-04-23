@@ -12,7 +12,11 @@ from faucet.models import *
 # TODO: Going to show the page no matter what, so pull these variables out.
 if HealthCheck.objects.latest('timestamp'):
     hc = HealthCheck.objects.latest('timestamp')
-    balance = hc.balance
+    t_balance = hc.t_balance
+    z_balance = hc.z_balance
+    print "T balance", t_balance
+    print " z balance", z_balance
+    balance = {'transparent': t_balance, 'private': z_balance}
     difficulty = hc.difficulty
     height = hc.height
     payouts = Drip.objects.count()
@@ -83,7 +87,7 @@ def index(request):
                         print "operation status: ", resp[0]['status']
                         #why is it not working when it's executing?
                         if resp[0]['status'] == 'executing':
-                            msg = "Sent! Get the status of your shielded funds with z_getoperationstatus {0}.".format(opid)
+                            msg = "Sent! Get the status of your private payout with z_getoperationstatus {0}.".format(opid)
                             return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
                         if resp[0]['status'] == 'failed':
                             msg = "Operation failed for {0}. Error message: {1}".format(opid, resp[0]['error']['message'])
