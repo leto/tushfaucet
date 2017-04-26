@@ -9,24 +9,6 @@ from datetime import *
 from pyZcash.rpc.ZDaemon import *
 from faucet.models import *
 
-# TODO: Going to show the page no matter what, so pull these variables out.
-if HealthCheck.objects.latest('timestamp'):
-    hc = HealthCheck.objects.latest('timestamp')
-    t_balance = hc.t_balance
-    z_balance = hc.z_balance
-    print "T balance", t_balance
-    print " z balance", z_balance
-    balance = {'transparent': t_balance, 'private': z_balance}
-    difficulty = hc.difficulty
-    height = hc.height
-    payouts = Drip.objects.count()
-else:
-    balance = '0'
-    difficulty = '0'
-    height = '0'
-    #TODO: where to put this?
-zd = ZDaemon()
-version = zd.getVersion()
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -37,6 +19,25 @@ def get_client_ip(request):
     return ip
 
 def index(request):
+    # TODO: Going to show the page no matter what, so pull these variables out.
+    if HealthCheck.objects.latest('timestamp'):
+        hc = HealthCheck.objects.latest('timestamp')
+        t_balance = hc.t_balance
+        z_balance = hc.z_balance
+        print "T balance", t_balance
+        print " z balance", z_balance
+        balance = {'transparent': t_balance, 'private': z_balance}
+        difficulty = hc.difficulty
+        height = hc.height
+        payouts = Drip.objects.count()
+    else:
+        balance = '0'
+        difficulty = '0'
+        height = '0'
+        #TODO: where to put this?
+    zd = ZDaemon()
+    version = zd.getVersion()
+    
     #If it is a post, an address was submitted.
     if request.method == 'POST':
         # Check IP and payout address
