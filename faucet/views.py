@@ -34,7 +34,7 @@ def index(request):
         balance = '0'
         difficulty = '0'
         height = '0'
-        #TODO: where to put this?
+        
     zd = ZDaemon()
     version = zd.getVersion()
 
@@ -80,7 +80,7 @@ def index(request):
                 zaddrs = zd.z_listaddresses()
                 sender = zaddrs[0]
                 msg = 'Thanks for using zfaucet!'
-                opid = zd.z_sendmany(sender, address, 0.01, msg)
+                opid = zd.z_sendmany(sender, address, 0.1, msg)
                 print "OPID", opid
                 if opid != None and 'opid' in opid:
                         resp = zd.z_getoperationstatus(opid)
