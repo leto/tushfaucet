@@ -35,8 +35,8 @@ class Migration(migrations.Migration):
                 ('height', models.IntegerField()),
                 ('difficulty', models.FloatField()),
                 ('balance', models.FloatField(null=True)),
-                ('t_balance', models.FloatField(default=0)),
-                ('z_balance', models.FloatField(default=0))
+                ('t_balance', models.FloatField(blank=True, null=True, default=0)),
+                ('z_balance', models.FloatField(blank=True, null=True, default=0))
             ],
             options={
                 'ordering': ['-timestamp'],
