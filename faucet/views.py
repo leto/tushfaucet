@@ -37,7 +37,7 @@ def index(request):
         #TODO: where to put this?
     zd = ZDaemon()
     version = zd.getVersion()
-    
+
     #If it is a post, an address was submitted.
     if request.method == 'POST':
         # Check IP and payout address
@@ -88,7 +88,7 @@ def index(request):
                         print "operation status: ", resp[0]['status']
                         #why is it not working when it's executing?
                         if resp[0]['status'] == 'executing':
-                            msg = "Sent! Get the status of your private payout with z_getoperationstatus {0}.".format(opid)
+                            msg = "Sent! Get the status of your private payout with z_getoperationstatus '[\"{0}\"]'.".format(opid)
                             return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
                         if resp[0]['status'] == 'failed':
                             msg = "Operation failed for {0}. Error message: {1}".format(opid, resp[0]['error']['message'])
