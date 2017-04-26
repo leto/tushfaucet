@@ -51,7 +51,7 @@ GRANT ALL PRIVILEGES ON DATABASE django TO django;
 Make the migrations for the django db:
 ```
 python manage.py makemigrations
-python mange.py migrate
+python manage.py migrate
 ```
 
 ## Configuring the webserver
@@ -122,10 +122,13 @@ And append this block within `/etc/fail2ban/jail.local`:
 ## Setting up custom functions
 
 Create a cron job for a regular faucet health check to collect wallet/network stats, and to sweep coinbase funds into a zaddr:
+`crontab -e`
 
-crontab -e  
+Add lines:
+```
 */5 * * * * python /home/{{faucet_user}}/faucet/manage.py healthcheck 
 */5 * * * * python /home/{{faucet_user}}/faucet/manage.py sweepfunds
-
+```
 Make sure you run the healthcheck before starting the server so the database has at least one entry.
  
+`python manage.py healthcheck`
