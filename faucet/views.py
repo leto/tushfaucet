@@ -34,7 +34,7 @@ def index(request):
         balance = '0'
         difficulty = '0'
         height = '0'
-        
+
     zd = ZDaemon()
     version = zd.getVersion()
 
@@ -68,7 +68,7 @@ def index(request):
         try:
             # Did the tx work?
             if len(address) == len('tmKBPqa8qqKA7vrGq1AaXHSAr9vqa3GczzK'):
-                tx = zd.sendtoaddress(address, 0.1)
+                tx = zd.sendtoaddress(address, 0.5)
                 if len(tx) == len('2ac64e297e3910e7ffda7210e7aa2463fe2ec5f69dfe7fdf0b4b9be138a9bfb8'):
                     #Save Drip.
                     drip = Drip(address=address,txid=tx,ip=ip)
@@ -80,7 +80,7 @@ def index(request):
                 zaddrs = zd.z_listaddresses()
                 sender = zaddrs[0]
                 msg = 'Thanks for using zfaucet!'
-                opid = zd.z_sendmany(sender, address, 0.1, msg)
+                opid = zd.z_sendmany(sender, address, 0.5, msg)
                 print "OPID", opid
                 if opid != None and 'opid' in opid:
                         resp = zd.z_getoperationstatus(opid)
