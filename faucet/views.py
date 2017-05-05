@@ -42,9 +42,9 @@ def index(request):
     if request.method == 'POST':
         # Check IP and payout address
         # This is the old workaround, added get_client_ip
-        # ip = request.META.get('REMOTE_ADDR')
-        # if ip == '127.0.0.1':
-        #     ip = request.META.get('HTTP_X_REAL_IP')
+        ip = request.META.get('REMOTE_ADDR')
+        if ip == '127.0.0.1':
+            ip = request.META.get('HTTP_X_REAL_IP')
         ip = get_client_ip(request)
         address = request.POST.get('address', '')
         print "IP: ", ip
@@ -56,9 +56,9 @@ def index(request):
 
             # TODO: keep track of sessions as well, track one per session?
 
-            #if timesince < (60*60*12):
-                # msg = "Sorry, you received a payout too recently.  Come back later."
-                # return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
+            if timesince < (60*60*12):
+                msg = "Sorry, you received a payout too recently.  Come back later."
+                return render(request, 'faucet/faucet.html', {'version':version,'balance':balance,'difficulty':difficulty,'height':height, 'payouts':payouts, 'flash':True, 'message':msg})
 
         except (Drip.DoesNotExist, IndexError) as e:
             # Nothing in queryset, so we've never seen this ip and address before (individually)
@@ -68,7 +68,7 @@ def index(request):
         try:
             # Did the tx work?
             if len(address) == len('tmKBPqa8qqKA7vrGq1AaXHSAr9vqa3GczzK'):
-                tx = zd.sendtoaddress(address, 0.5)
+                tx = zd.sendtoaddress(address, 1.0)
                 if len(tx) == len('2ac64e297e3910e7ffda7210e7aa2463fe2ec5f69dfe7fdf0b4b9be138a9bfb8'):
                     #Save Drip.
                     drip = Drip(address=address,txid=tx,ip=ip)
@@ -80,7 +80,7 @@ def index(request):
                 zaddrs = zd.z_listaddresses()
                 sender = zaddrs[0]
                 msg = 'Thanks for using zfaucet!'
-                opid = zd.z_sendmany(sender, address, 0.5, msg)
+                opid = zd.z_sendmany(sender, address, 1.0, msg)
                 print "OPID", opid
                 if opid != None and 'opid' in opid:
                         resp = zd.z_getoperationstatus(opid)
