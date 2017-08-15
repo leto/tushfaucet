@@ -68,7 +68,7 @@ def index(request):
         try:
             # Did the tx work?
             if len(address) == len('tmKBPqa8qqKA7vrGq1AaXHSAr9vqa3GczzK'):
-                tx = zd.sendtoaddress(address, 1.0)
+                tx = zd.sendtoaddress(address, 3.0)
                 if len(tx) == len('2ac64e297e3910e7ffda7210e7aa2463fe2ec5f69dfe7fdf0b4b9be138a9bfb8'):
                     #Save Drip.
                     drip = Drip(address=address,txid=tx,ip=ip)
