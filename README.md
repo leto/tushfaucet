@@ -1,6 +1,6 @@
-# Zcash Testnet Faucet 
+# TUSH Faucet 
 
-A Django app that dispenses testnet TAZ to transparent and shielded addresses. Accepts donations as well.
+A Django app that dispenses testnet HUSH, known as TUSH, to transparent and shielded addresses. Accepts donations as well.
 
 ## Initial setup instructions:  
 
