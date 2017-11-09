@@ -59,9 +59,9 @@ python manage.py migrate
 Set up nginx and Gunicorn:
 
 ```
-gunicorn --workers=2 zfaucet.wsgi  
+gunicorn --workers=2 tush-faucet.wsgi  
 sudo service nginx start  
-vim /etc/nginx/sites-available/zfaucet 
+vim /etc/nginx/sites-available/tush-faucet 
 ```
 
     server {
@@ -99,7 +99,7 @@ Then from within `/home/{{ faucet_user }}/faucet/`, run command: `python manage.
 
 Set up fail2ban to rate-limit requests for the faucet. Put the following in `/etc/fail2ban/filter.d/zcash-faucet.conf`:
 ```
-# Fail2ban filter for Zcash faucet
+# Fail2ban filter for TUSH faucet
 [Definition]
 
 failregex = ^ -.*POST / HTTP/1\.." 200
@@ -107,12 +107,12 @@ ignoreregex =
 ```
 And append this block within `/etc/fail2ban/jail.local`:
 ```
-      [zcash-faucet]
+      [tush-faucet]
 
       enabled  = true
-      filter   = zcash-faucet
+      filter   = tush-faucet
       port     = http,https
-      action   = iptables-multiport[name=zcash-faucet, port="http,https"]
+      action   = iptables-multiport[name=tush-faucet, port="http,https"]
       logpath  = /var/log/nginx/access.log
       maxretry = 10
       findtime = 3600
